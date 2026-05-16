@@ -16,11 +16,10 @@ export async function sendContactEmail(data: ContactFormData) {
       from: 'onboarding@resend.dev', // Cambia esto a tu dominio verificado en Resend
       to: process.env.CONTACT_EMAIL || 'delivered@resend.dev',
       replyTo: data.email,
-      subject: `Nuevo mensaje de ${data.name} fresquesito del portafolio`,
+      subject: `Nuevo mensaje de ${data.name}, está fresquesito del portafolio...`,
       html: `
-        <h2>Nuevo mensaje de contacto</h2>
-        <p><strong>Nombre:</strong> ${data.name}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Nombre:</strong> ${data.name}.</p>
+        <p><strong>Email:</strong> ${data.email}.</p>
         <p><strong>Mensaje:</strong></p>
         <p>${data.message.replace(/\n/g, '<br>')}</p>
       `,
