@@ -1,7 +1,9 @@
 'use client'
 
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import { sendContactEmail } from '@/app/actions/send-email'
 import { contactData } from '@/lib/portfolio-data'
 
 interface ContactSectionProps {
@@ -14,11 +16,27 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
     email: '',
     message: '',
   })
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // API Key re_HYFNkwVi_CxzuwQCVaopWCapp9JVmvLRe
-    console.log('Form submitted:', formData)
+    setIsLoading(true)
+
+    try {
+      const result = await sendContactEmail(formData)
+
+      if (result.success) {
+        toast.success('¡Mensaje enviado exitosamente!')
+        setFormData({ name: '', email: '', message: '' })
+      } else {
+        toast.error(`Error: ${result.error}`)
+      }
+    } catch (error) {
+      toast.error('Error al enviar el mensaje. Intenta de nuevo.')
+      console.error('Error:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -132,10 +150,20 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
 
         <button
           type="submit"
-          className="flex items-center justify-center gap-2 w-full md:w-auto px-6 md:px-8 py-3 md:py-3.5 bg-accent text-accent-foreground rounded-xl font-medium hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5 transition-all text-sm md:text-base"
+          disabled={isLoading}
+          className="flex items-center justify-center gap-2 w-full md:w-auto px-6 md:px-8 py-3 md:py-3.5 bg-accent text-accent-foreground rounded-xl font-medium hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5 transition-all text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
         >
-          <Send className="w-4 h-4" />
-          Send Message
+          {isLoading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            <>
+              <Send className="w-4 h-4" />
+              Send Message
+            </>
+          )}
         </button>
       </form>
     </div>
