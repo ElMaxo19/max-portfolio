@@ -1,48 +1,50 @@
-'use client'
+"use client";
 
-import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react'
-import { useState } from 'react'
-import { toast } from 'sonner'
-import { sendContactEmail } from '@/app/actions/send-email'
-import { contactData } from '@/lib/portfolio-data'
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { sendContactEmail } from "@/app/actions/send-email";
+import { contactData } from "@/lib/portfolio-data";
 
 interface ContactSectionProps {
-  data?: typeof contactData
+  data?: typeof contactData;
 }
 
 export function ContactSection({ data = contactData }: ContactSectionProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-  const [isLoading, setIsLoading] = useState(false)
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
     try {
-      const result = await sendContactEmail(formData)
+      const result = await sendContactEmail(formData);
 
       if (result.success) {
-        toast.success('¡Mensaje enviado exitosamente!')
-        setFormData({ name: '', email: '', message: '' })
+        toast.success("¡Mensaje enviado exitosamente!");
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        toast.error(`Error: ${result.error}`)
+        toast.error(`Error 500: ${result.error}`);
       }
     } catch (error) {
-      toast.error('Error al enviar el mensaje. Intenta de nuevo.')
-      console.error('Error:', error)
+      toast.error("Error al enviar el mensaje. Intenta de nuevo.");
+      console.error("Error:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-6 md:space-y-8">
       <div>
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Contact</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          Contact
+        </h2>
         <div className="w-10 h-1 bg-accent rounded-full mb-6" />
       </div>
 
@@ -65,7 +67,9 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
             <Mail className="w-5 h-5 md:w-6 md:h-6 text-accent" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">Email</h3>
+            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">
+              Email
+            </h3>
             <a
               href={`mailto:${data.email}`}
               className="text-sm md:text-base text-foreground hover:text-accent transition-colors font-medium truncate block"
@@ -80,9 +84,11 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
             <Phone className="w-5 h-5 md:w-6 md:h-6 text-accent" />
           </div>
           <div>
-            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">Phone</h3>
+            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">
+              Phone
+            </h3>
             <a
-              href={`tel:${data.phone.replace(/\s/g, '')}`}
+              href={`tel:${data.phone.replace(/\s/g, "")}`}
               className="text-sm md:text-base text-foreground hover:text-accent transition-colors font-medium"
             >
               {data.phone}
@@ -95,8 +101,12 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
             <MapPin className="w-5 h-5 md:w-6 md:h-6 text-accent" />
           </div>
           <div>
-            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">Location</h3>
-            <p className="text-sm md:text-base text-foreground font-medium">{data.location}</p>
+            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">
+              Location
+            </h3>
+            <p className="text-sm md:text-base text-foreground font-medium">
+              {data.location}
+            </p>
           </div>
         </div>
       </div>
@@ -104,28 +114,38 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
       <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-foreground mb-2"
+            >
               Full Name
             </label>
             <input
               type="text"
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-secondary border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-all text-sm md:text-base"
               placeholder="John Doe"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-foreground mb-2"
+            >
               Email Address
             </label>
             <input
               type="email"
               id="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-secondary border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-all text-sm md:text-base"
               placeholder="john@example.com"
               required
@@ -134,14 +154,19 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-foreground mb-2"
+          >
             Message me
           </label>
           <textarea
             id="message"
             rows={6}
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
             className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-secondary border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-all resize-none text-sm md:text-base"
             placeholder="Write your message here..."
             required
@@ -167,5 +192,5 @@ export function ContactSection({ data = contactData }: ContactSectionProps) {
         </button>
       </form>
     </div>
-  )
+  );
 }

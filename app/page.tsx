@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { ProfileSidebar, ThemeToggle } from '@/features/shared'
-import { AboutSection } from '@/features/about'
-import { ResumeSection } from '@/features/resume'
-import { PortfolioSection } from '@/features/portfolio'
-import { ContactSection } from '@/features/contact'
+import { useState } from "react";
+import { ProfileSidebar, ThemeToggle } from "@/features/shared";
+import { AboutSection } from "@/features/about";
+import { ResumeSection } from "@/features/resume";
+import { PortfolioSection } from "@/features/portfolio";
+import { ContactSection } from "@/features/contact";
 import {
   profileData,
   aboutData,
   resumeData,
   portfolioData,
   contactData,
-} from '@/lib/portfolio-data'
+} from "@/lib/portfolio-data";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('about')
+  const [activeSection, setActiveSection] = useState("about");
 
   return (
     <div className="min-h-screen bg-background p-3 sm:p-4 md:p-6 lg:p-12">
@@ -31,14 +31,14 @@ export default function Home() {
           <main className="flex-1 bg-card rounded-xl md:rounded-2xl border border-border overflow-hidden">
             {/* Navigation */}
             <nav className="flex gap-1 sm:gap-2 md:gap-4 p-3 sm:p-4 md:p-6 border-b border-border overflow-x-auto scrollbar-hide">
-              {['about', 'resume', 'portfolio', 'contact'].map((section) => (
+              {["about", "resume", "portfolio", "contact"].map((section) => (
                 <button
                   key={section}
                   onClick={() => setActiveSection(section)}
                   className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium capitalize transition-colors whitespace-nowrap shrink-0 ${
                     activeSection === section
-                      ? 'text-foreground bg-accent/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                      ? "text-foreground bg-accent/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   }`}
                 >
                   {section}
@@ -47,14 +47,20 @@ export default function Home() {
             </nav>
 
             <div className="p-4 sm:p-5 md:p-6 lg:p-8">
-              {activeSection === 'about' && <AboutSection data={aboutData} />}
-              {activeSection === 'resume' && <ResumeSection data={resumeData} />}
-              {activeSection === 'portfolio' && <PortfolioSection data={portfolioData} />}
-              {activeSection === 'contact' && <ContactSection data={contactData} />}
+              {activeSection === "about" && <AboutSection data={aboutData} />}
+              {activeSection === "resume" && (
+                <ResumeSection data={resumeData} />
+              )}
+              {activeSection === "portfolio" && (
+                <PortfolioSection data={portfolioData} />
+              )}
+              {activeSection === "contact" && (
+                <ContactSection data={contactData} />
+              )}
             </div>
           </main>
         </div>
       </div>
     </div>
-  )
+  );
 }
