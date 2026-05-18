@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react";
 import {
   SiHtml5,
-  SiCss3,
   SiJavascript,
   SiTypescript,
   SiReact,
@@ -17,7 +16,8 @@ import {
   SiGithub,
   SiPnpm,
 } from "react-icons/si";
-import { FaTools } from "react-icons/fa";
+import { FaWrench } from "react-icons/fa";
+import { TbBrandCss3 } from "react-icons/tb";
 
 interface Technology {
   name: string;
@@ -28,7 +28,7 @@ interface Technology {
 const technologies = {
   frontend: [
     { name: "HTML", icon: <SiHtml5 className="w-8 h-8" />, color: "#E34C26" },
-    { name: "CSS", icon: <SiCss3 className="w-8 h-8" />, color: "#563D7C" },
+    { name: "CSS", icon: <TbBrandCss3 className="w-8 h-8" />, color: "#563D7C" },
     { name: "JavaScript", icon: <SiJavascript className="w-8 h-8" />, color: "#F7DF1E" },
     { name: "TypeScript", icon: <SiTypescript className="w-8 h-8" />, color: "#3178C6" },
     { name: "React", icon: <SiReact className="w-8 h-8" />, color: "#61DAFB" },
@@ -46,7 +46,7 @@ const technologies = {
   tools: [
     { name: "Git", icon: <SiGit className="w-8 h-8" />, color: "#F1502F" },
     { name: "GitHub", icon: <SiGithub className="w-8 h-8" />, color: "#181717" },
-    { name: "Antigravity", icon: <FaTools className="w-8 h-8" />, color: "#FF6B6B" },
+    { name: "Antigravity", icon: <FaWrench className="w-8 h-8" />, color: "#FF6B6B" },
     { name: "pnpm", icon: <SiPnpm className="w-8 h-8" />, color: "#F69220" },
   ],
 };
