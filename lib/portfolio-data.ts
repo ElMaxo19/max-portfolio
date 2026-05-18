@@ -32,7 +32,7 @@ export const aboutData = {
         "Creating robust APIs and server-side solutions with Node.js environment and modern frameworks.",
     },
     {
-      icon: "Smartphone",
+      icon: "Gauge",
       title: "Performance Optimization",
       description:
         "Enhancing application speed, SEO rankings, and code quality for seamless user experiences.",

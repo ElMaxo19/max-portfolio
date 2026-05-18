@@ -1,10 +1,10 @@
-import { PenTool, Code, Smartphone, Zap } from "lucide-react";
+import { PenTool, Code, Gauge, Zap } from "lucide-react";
 import { aboutData } from "@/lib/portfolio-data";
 
 const iconMap = {
   Code,
   Zap,
-  Smartphone,
+  Gauge,
   PenTool,
 };
 
