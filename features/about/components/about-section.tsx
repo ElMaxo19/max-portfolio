@@ -1,5 +1,6 @@
 import { PenTool, Code, Gauge, Zap } from "lucide-react";
 import { aboutData } from "@/lib/portfolio-data";
+import { TechnologiesSection } from "./tech-carousel";
 
 const iconMap = {
   Code,
@@ -60,6 +61,9 @@ export function AboutSection({ data = aboutData }: AboutSectionProps) {
           })}
         </div>
       </div>
+
+      {/* Technologies & Tools */}
+      <TechnologiesSection />
     </div>
   );
 }
